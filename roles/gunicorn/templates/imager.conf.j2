@@ -5,15 +5,15 @@ stop on runlevel [016]
 
 respawn
 setuid www-data
-setgid nogroup
-chdir /home/ubuntu/imager/django-imager/imager
-env SECRET_KEY==^&zx$ghu261#fb^#epeve1tve@l_-_6t#q5@%j6yhkt-b_qej
-env RDS_DB_NAME=imager
-env RDS_USERNAME=master
-env RDS_PASSWORD=password
-env RDS_HOSTNAME=imager.cwydhyrq6asz.us-west-2.rds.amazonaws.com
-env RDS_PORT=5432
+setgid www-data
+chdir {{ manage_home }}
+env SECRET_KEY="{{ SECRET_KEY }}"
+env RDS_DB_NAME="{{ db_host.ec2_DBName }}"
+env RDS_USERNAME="{{ db_host.ec2_master_username }}"
+env RDS_PASSWORD="{{ RDS_PASSWORD }}"
+env RDS_HOSTNAME="{{ db_host.ec2__address }}"
+env RDS_PORT="{{ db_host.ec2__port }}"
 env DJANGO_CONFIGURATION=Prod
 env DJANGO_SETTINGS_MODULE=imager.settings
 
-exec /home/ubuntu/.virtualenvs/imager/bin/gunicorn --env DJANGO_SETTING$
+exec gunicorn -b 127.0.0.1:8000 -w 4 imager.wsgi --error-logfile /tmp/gunicorn-error.log

@@ -1,11 +1,11 @@
 keypair: pk-aws.pem
 security_group: ssh-access
-instance_type: t1.micro
+instance_type: t2.micro
 ami: ami-29ebb519
-vpc_subnet_id: subnet-b313b5c4
+vpc_subnet_id: subnet-5ed3503b
 region: us-west-2
 instance_tags: {"Name": "ansible-built"}
 root_ebs_size: 8
-zone: us-west-2b
+zone: us-west-2a
 instance_profile_name: mypoweruser
 num_instances: 1

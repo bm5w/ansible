@@ -6,7 +6,7 @@
 
 - name: Create gunicorn Upstart Job
   sudo: yes
-  template: src=djangoblog.conf.j2 dest=/etc/init/djangoblog.conf
+  template: src=imager.conf.j2 dest=/etc/init/imager.conf
 #   register: config_changes
 
 
@@ -15,7 +15,9 @@
 #   when: not config_changes.changed
 #   service: name=djangoblog state=restarted
 
+  # when: config_changes.changed
+
+
 - name: Restart gunicorn Upstart Job
   sudo: yes
-  # when: config_changes.changed
-  service: name=djangoblog state=restarted
+  service: name=imager state=restarted

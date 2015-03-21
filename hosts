@@ -1,4 +1,7 @@
 [all]
 localhost ansible_connection=local
 
+[aws]
+ec2-52-10-155-107.us-west-2.compute.amazonaws.com
+
 [launched]

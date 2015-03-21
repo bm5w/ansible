@@ -1,2 +1,3 @@
 django_home: /home/ubuntu/django-imager
-rds_db_instance: imager
+manage_home: /home/ubuntu/django-imager/imager
+rds_db_instance: imagerms2
