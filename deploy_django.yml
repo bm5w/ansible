@@ -5,6 +5,14 @@
   remote_user: ubuntu
   gather_facts: yes
   
+
+  # tasks:
+  #   - name: see what's up with our hosts
+  #     debug: var=hostvars
+        # debut: var=hostvars[inventory_hostname] # info about just one host
+        # debug: var=hostvars.ansible_date_time
+
+
   roles:
     - role: django
     - role: gunicorn
@@ -22,4 +30,6 @@
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             }
           - location /static/ { root {{ django_home }}; }
+          - location /static/ { root /www/; client_max_body_size 20M;}
+          - location /media/ { root /www/; client_max_body_size 20M;}
 

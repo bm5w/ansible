@@ -12,9 +12,10 @@
     - python-pip
     - python-psycopg2
     - git
+    - libjpeg-dev
 
 - name: Clone Django Repository
-  git: repo=https://github.com/cewing/djangoblog_uwpce.git dest={{ django_home }} force=yes
+  git: repo=https://github.com/jacquestardie/django-imager.git dest={{ django_home }} force=yes
 
 - name: Install Python Dependencies
   sudo: yes
@@ -26,13 +27,12 @@
   set_fact:
     db_host: "{{ hostvars[groups[rds_db_instance][0]] }}"
 
-- name: Get DB Password
+- name: Get RDS_PASSWORD
   include_vars: secrets.yml
-
 
 - name: Set DB URL
   set_fact: 
-    db_url: "{{ db_host.ec2_engine }}://{{ db_host.ec2_master_username }}:{{ db_password }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
+    db_url: "{{ db_host.ec2_engine }}://{{ db_host.ec2_master_username }}:{{ RDS_PASSWORD }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
 
 - name: Run Migrations
   environment:
